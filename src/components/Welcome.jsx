@@ -49,7 +49,9 @@ const setupTextHover = (container, type) => {
     };
 
     const handleMouseLeave = () => {
-        letters.forEach((letter) => animateLetters(letter, base, 0.3));
+        letters.forEach((letter) => {
+            animateLetters(letter, base, 0.3);
+        });
     };
 
     container.addEventListener("mousemove", handleMouseMove);
