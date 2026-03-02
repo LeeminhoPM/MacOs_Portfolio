@@ -38,15 +38,16 @@ const Dock = () => {
             animateIcon(e.clientX - left);
         };
 
-        const resetIcons = () =>
-            icons.forEach((icon) =>
+        const resetIcons = () => {
+            icons.forEach((icon) => {
                 gsap.to(icon, {
                     scale: 1,
                     y: 0,
                     duration: 0.3,
                     ease: "power1.out",
-                }),
-            );
+                });
+            });
+        };
 
         dock.addEventListener("mousemove", handleMouseMove);
         dock.addEventListener("mouseleave", resetIcons);
@@ -57,7 +58,7 @@ const Dock = () => {
         };
     }, []);
 
-    const toggleApp = (app) => {
+    const toggleApp = () => {
         // TODO Implement app opening logic, e.g. show modal or navigate
     };
 
@@ -74,7 +75,7 @@ const Dock = () => {
                             data-tooltip-content={name}
                             data-tooltip-delay-show={150}
                             disabled={!canOpen}
-                            onClick={() => toggleApp({ id, canOpen })}
+                            onClick={() => toggleApp()}
                         >
                             <img
                                 src={`/images/${icon}`}
