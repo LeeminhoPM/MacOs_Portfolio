@@ -56,34 +56,28 @@ const setupTextHover = (container, type) => {
     container.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-        const titleCleanup = container.removeEventListener(
-            "mousemove",
-            handleMouseMove,
-        );
-        const subtitleCleanup = container.removeEventListener(
-            "mouseleave",
-            handleMouseLeave,
-        );
-
-        return () => {
-            titleCleanup();
-            subtitleCleanup();
-        };
+        container.removeEventListener("mousemove", handleMouseMove);
+        container.removeEventListener("mouseleave", handleMouseLeave);
     };
 };
 
 const Welcome = () => {
     const titleRef = useRef(null);
-    const subtiteRef = useRef(null);
+    const subtitleRef = useRef(null);
 
     useGSAP(() => {
-        setupTextHover(titleRef.current, "title");
-        setupTextHover(subtiteRef.current, "subtitle");
+        const titleCleanup = setupTextHover(titleRef.current, "title");
+        const subtitleCleanup = setupTextHover(subtitleRef.current, "subtitle");
+
+        return () => {
+            titleCleanup?.();
+            subtitleCleanup?.();
+        };
     }, []);
 
     return (
         <section id="welcome">
-            <p ref={subtiteRef}>
+            <p ref={subtitleRef}>
                 {renderText(
                     "Hey, I'm Khanh! Welcome to my",
                     "text-3xl font-georama",
@@ -96,7 +90,7 @@ const Welcome = () => {
 
             <div className="small-screen">
                 <p>
-                    This Portfolio is designed for desktop/tabled screens only.
+                    This Portfolio is designed for desktop/tablet screens only.
                 </p>
             </div>
         </section>
