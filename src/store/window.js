@@ -4,7 +4,11 @@ import { INITIAL_Z_INDEX, WINDOW_CONFIG } from "#constants";
 
 const useWindowStore = create(
     immer((set) => ({
-        windows: WINDOW_CONFIG,
+        // clone initial config so mutations don't affect the original constant
+        windows:
+            typeof structuredClone === "function"
+                ? structuredClone(WINDOW_CONFIG)
+                : JSON.parse(JSON.stringify(WINDOW_CONFIG)),
         nextZIndex: INITIAL_Z_INDEX + 1,
 
         openWindow: (windowKey, data = undefined) =>
