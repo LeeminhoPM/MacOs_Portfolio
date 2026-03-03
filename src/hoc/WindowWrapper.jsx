@@ -4,6 +4,11 @@ import gsap from "gsap";
 import { Draggable } from "gsap/Draggable";
 import React, { useLayoutEffect, useRef } from "react";
 
+// register plugin only in browser environments so SSR won't break
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(Draggable);
+}
+
 const WindowWrapper = (Component, windowKey) => {
     const Wrapped = (props) => {
         const { focusWindow, windows } = useWindowStore();

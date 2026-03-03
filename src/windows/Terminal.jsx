@@ -5,6 +5,12 @@ import { Check, Flag } from "lucide-react";
 import React from "react";
 
 const Terminal = () => {
+    // compute stats dynamically instead of hard‑coding values
+    const totalStacks = techStack.length;
+    // for now treat all stacks as loaded; replace with real state when available
+    const loadedCount = totalStacks;
+    const percent = Math.round((loadedCount / totalStacks) * 100);
+
     return (
         <>
             <div id="window-header">
@@ -42,8 +48,9 @@ const Terminal = () => {
 
                 <div className="footnote">
                     <p>
-                        <Check size={20} />5 of 5 stacks loaded successfully
-                        (100%)
+                        <Check size={20} />
+                        {loadedCount} of {totalStacks} stacks loaded
+                        successfully ({percent}%)
                     </p>
 
                     <p className="text-black">
