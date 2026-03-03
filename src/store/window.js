@@ -7,7 +7,7 @@ const useWindowStore = create(
         windows: WINDOW_CONFIG,
         nextZIndex: INITIAL_Z_INDEX + 1,
 
-        openWindow: (windowKey, data = null) =>
+        openWindow: (windowKey, data = undefined) =>
             set((state) => {
                 const win = state.windows[windowKey];
                 if (!win) {
@@ -16,7 +16,8 @@ const useWindowStore = create(
                 }
                 win.isOpen = true;
                 win.zIndex = state.nextZIndex;
-                win.data = data ?? win.data;
+                // only preserve existing data when caller omits second arg (undefined)
+                win.data = data === undefined ? win.data : data;
                 state.nextZIndex++;
             }),
 
