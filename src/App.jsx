@@ -1,6 +1,14 @@
 import { Dock, Navbar, Welcome } from "#components";
 import React from "react";
-import TerminalWindow from "#windows/Terminal";
+import {
+    Contact,
+    Finder,
+    Image,
+    Resume,
+    Safari,
+    Terminal,
+    Text,
+} from "#windows";
 
 const App = () => {
     return (
@@ -9,7 +17,13 @@ const App = () => {
             <Welcome />
             <Dock />
 
-            <TerminalWindow />
+            <Terminal />
+            <Safari />
+            <Resume />
+            <Finder />
+            <Text />
+            <Image />
+            <Contact />
         </main>
     );
 };
